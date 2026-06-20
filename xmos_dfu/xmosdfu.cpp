@@ -78,6 +78,7 @@ DEALINGS WITH THE SOFTWARE OR DOCUMENTATION.
 #define ELEMENTIII_PID 0x8885
 #define ELDACIIPLUS_PID 0x8886
 #define ELDACIIPLUSBal_PID 0x8889
+#define IFI_XU216_PID 0x3008
 
 unsigned short pidList[] = {ATOMDAC2_PID,
                             ATOMDAC_PID,
@@ -87,7 +88,8 @@ unsigned short pidList[] = {ATOMDAC2_PID,
                             ELDACII_PID,
                             ELEMENTIII_PID,
                             ELDACIIPLUS_PID,
-                            ELDACIIPLUSBal_PID}; 
+                            ELDACIIPLUSBal_PID,
+                            IFI_XU216_PID};
 
 unsigned int XMOS_DFU_IF = 0;
 
