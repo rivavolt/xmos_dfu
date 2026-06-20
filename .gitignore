@@ -6,3 +6,5 @@ bin/
 .DS_Store
 *.xe
 .vs/*
+result
+result-*

@@ -5,6 +5,9 @@ This script was originally distributed as a component of the [XMOS USB Audio 2.0
 - EL DAC II(+)
 - Element II
 - Element III
+- iFi DACs built on the XMOS XU216 (e.g. Zen DAC) — **added by this fork** (PID `0x3008`)
+
+> **This is a fork of [`jdslabs/xmos_dfu`](https://github.com/jdslabs/xmos_dfu)** that adds the iFi XU216 product ID to `pidList[]` in `xmosdfu.cpp` and ships a Nix flake. Everything else is upstream.
 
 ## License
   A copy of the original AS-IS [License](https://github.com/jdslabs/xmos_dfu/blob/main/LICENSE.txt) is included within this repository.
@@ -18,6 +21,20 @@ This script was originally distributed as a component of the [XMOS USB Audio 2.0
 This command line tool only checks for a valid JDS Labs USB Vendor and Product ID before loading firmware to your DAC. It does *not* check the .bin file you supply, nor can it check that the DAC matches the .bin file you provide. Thus, triple check that you are loading the right firmware for the right model!
 
 In the event that you accidentally load firmware for the wrong JDS Labs DAC, you can normally recover by flashing the intended firmware. If not, please reach out to jdslabs.com/support
+
+# Usage with Nix
+This fork ships a flake that builds `xmosdfu` from this repo's own source (the iFi XU216 PID is already in `pidList[]`), so there is no fetch/patch indirection.
+
+```sh
+# enumerate connected DACs
+nix run github:rivavolt/xmos_dfu -- --listdevices
+
+# or build, then flash (one DAC plugged in at a time!)
+nix build github:rivavolt/xmos_dfu
+sudo ./result/bin/xmosdfu --download "/path/to/firmware.bin"
+```
+
+The package attribute is `packages.<system>.default` (also `.xmos-dfu`), built for `x86_64-linux` and `aarch64-linux`.
 
 # Usage in macOS
 This process has been tested under Big Sur and Monterey on both Intel and M1 based Macs.
